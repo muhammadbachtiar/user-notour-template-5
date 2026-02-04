@@ -42,7 +42,7 @@ export function Footer({ data }: FooterProps) {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div>
-            <div className="flex items-center space-x-3 mb-6">
+            <div className="flex items-center space-x-1 sm:space-x-3 mb-6">
               <Image
                 className="h-1"
                 src={data?.logo ?? '/images/logo/enim.png'}
@@ -55,7 +55,7 @@ export function Footer({ data }: FooterProps) {
                 }}
               />
               <div className="flex flex-col justify-center">
-                  <h1 className="font-bold text-lg leading-5 text-[#F7C873]">{data?.regionEntity}</h1>
+                  <h1 className="font-bold text-md sm:text-lg leading-5 text-[#F7C873]">{data?.regionEntity}</h1>
                   <p className="text-xs font-semibold text-black">{data?.regionDescription}</p>
                 </div>
             </div>

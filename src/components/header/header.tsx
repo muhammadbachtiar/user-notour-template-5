@@ -68,7 +68,9 @@ export default function Header({ data }: HeaderProps) {
                       </div>
                       <div className="flex items-center">
                         <Mail className="h-4 w-4 mr-1" />
-                        <span>{data?.email}</span>
+                        <a href={`mailto:${data?.email}`} className="hover:underline">
+                          {data?.email}
+                        </a>
                       </div>
                     </div>
                     <Sosmed />

@@ -7,8 +7,8 @@ export function useContent() {
   const { data: logoData } = useSetting(`logo-${process.env.NEXT_PUBLIC_VILLAGE_ID}`, {});
   const { data: serviceData } = useSetting(`service-${process.env.NEXT_PUBLIC_VILLAGE_ID}`, {});
   const { data: appData } = useSetting(`app-${process.env.NEXT_PUBLIC_VILLAGE_ID}`, {});
-  const { data: welcomeData } = useStaticPage({}, `wellcome-message-${process.env.NEXT_PUBLIC_VILLAGE_ID}`); 
-  const { data: programData } = useStaticPage({}, `village-program-${process.env.NEXT_PUBLIC_VILLAGE_ID}`); 
+  const { data: welcomeData } = useStaticPage({}, `wellcome-message-${process.env.NEXT_PUBLIC_VILLAGE_ID}`);
+  const { data: programData } = useStaticPage({}, `village-program-${process.env.NEXT_PUBLIC_VILLAGE_ID}`);
   const { data: footerData } = useSetting(`footer-${process.env.NEXT_PUBLIC_VILLAGE_ID}`, {});
   const { data: menuData } = useSetting(`menu-${process.env.NEXT_PUBLIC_VILLAGE_ID}`, {});
   const { data: tourData } = useSetting(`tour-${process.env.NEXT_PUBLIC_VILLAGE_ID}`, {});
@@ -37,7 +37,7 @@ export function useContent() {
 
   const infoCards: InfoCard[] = serviceData?.value ?? [];
   const updatedInfoCards = infoCards.map(card => ({
-    ...card,    
+    ...card,
     description: `Semua informasi tentang ${card.title} dapat kamu lihat disini`,
   }));
 
@@ -101,15 +101,15 @@ export function useContent() {
   }
 
   const header = {
-    logo: logoData?.value?.imageUrl  ?? "/images/logo/enim.png",
-    regionEntity: logoData?.value?.regionEntity  ?? "",
-    regionDescription: logoData?.value?.regionDescription  ?? "",
-    menus: menuData?.value ?? [],    
+    logo: logoData?.value?.imageUrl ?? "/images/logo/enim.png",
+    regionEntity: logoData?.value?.regionEntity ?? "",
+    regionDescription: logoData?.value?.regionDescription ?? "",
+    menus: menuData?.value ?? [],
   }
 
   return {
     hero,
-    updatedInfoCards, 
+    updatedInfoCards,
     infoCards,
     about,
     gallery,

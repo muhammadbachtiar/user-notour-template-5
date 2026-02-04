@@ -21,6 +21,33 @@ export function Footer({ data }: FooterProps) {
 
   const hasBrackets = /[\[\]]/.test(data?.regionEntity ?? '');
 
+  // Recursive function to collect all leaf menu items (no children and staticPage is null)
+  const getLeafMenuItems = (items: NavItem[] | null | undefined): NavItem[] => {
+    if (!items || !Array.isArray(items)) return [];
+    
+    const leafItems: NavItem[] = [];
+    
+    const collectLeafItems = (menuItems: NavItem[]) => {
+      for (const item of menuItems) {
+        // Check if this item is a leaf node (no children and staticPage is null)
+        if ((!item.child || item.child.length === 0) && item.staticPage === null) {
+          leafItems.push(item);
+        }
+        
+        // If has children, recursively search through them
+        if (item.child && Array.isArray(item.child) && item.child.length > 0) {
+          collectLeafItems(item.child);
+        }
+      }
+    };
+    
+    collectLeafItems(items);
+    return leafItems;
+  };
+
+  // Get all leaf menu items for Tautan Cepat
+  const quickLinks = getLeafMenuItems(data?.menus);
+
   const renderSocialIcon = (platform: string) => {
     switch (platform) {
       case "facebook":
@@ -44,7 +71,7 @@ export function Footer({ data }: FooterProps) {
 
   return (
     <footer className="bg-[#2A363B] text-white py-8 flex justify-center">
-      <div className="px-6 sm:px-0 max-w-lg md:max-w-3xl lg:max-w-5xl xl:max-w-6xl 2xl:max-w-7xl ">
+      <div className="px-6 sm:px-0 max-w-lg md:max-w-3xl lg:max-w-5xl xl:max-w-6xl 2xl:max-w-7xl w-full ">
         <div className="grid grid-cols-1 md:grid-cols-6 gap-2">
           
           <div className="col-span-1 md:col-span-2 flex flex-col items-start gap-2">
@@ -96,9 +123,8 @@ export function Footer({ data }: FooterProps) {
                 <div className="w-full">
                   <h3 className="w-full font-bold text-lg mb-4">Tautan Cepat</h3>
                   <ul className="space-y-2">
-                    {data?.menus?.filter((link: NavItem) => link.child === null)
-                      .map((link: NavItem) => (
-                      <li key={link.route}>
+                    {quickLinks.map((link: NavItem, index: number) => (
+                      <li key={`${link.route}-${index}`}>
                         <a href={link.route} className="text-green-100 hover:text-white">
                           {link.title}
                         </a>
@@ -163,7 +189,9 @@ export function Footer({ data }: FooterProps) {
                   </li>
                   <li className="flex items-center">
                     <Mail className="min-w-5 min-h-5 mr-3 text-green-100" />
-                    <span className="text-green-100">{data?.email}</span>
+                    <a href={`mailto:${data?.email}`} className="text-green-100 hover:text-white hover:underline">
+                      {data?.email}
+                    </a>
                   </li>
                 </ul>
               </div>
