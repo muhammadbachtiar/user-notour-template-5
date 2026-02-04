@@ -2,9 +2,9 @@ import type React from "react"
 import "@/app/globals.css"
 import { Geist, Geist_Mono } from "next/font/google";
 import SettingService from "@/shared/services/setting.service"
-import HolyLoader from "holy-loader";
 import RootLayoutClient from "./rootLayout";
 import Script from "next/script";
+import ClientLoader from "@/components/common/client-loader";
 
 export const metadata = await generateMetadata(); 
 
@@ -26,9 +26,10 @@ export default function RootLayout({
 
 
   return (
-     <html lang="en">
-      <HolyLoader/>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+     <html lang="en" suppressHydrationWarning>
+      <head />
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
+        <ClientLoader />
         <RootLayoutClient>{children}</RootLayoutClient>
          <Script
             src="https://website-widgets.pages.dev/dist/sienna.min.js"

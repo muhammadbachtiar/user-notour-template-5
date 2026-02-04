@@ -31,13 +31,13 @@ export default function LayoutInner({ children }: { children: React.ReactNode })
   }, []);
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
        <Header data={footer} />
-          <div className="mt-[var(--header-height)]">
-            {children}
-          </div>
-        <Footer data={footer} />
-    </>
+       <main className="mt-[var(--header-height)] flex-1">
+         {children}
+       </main>
+       <Footer data={footer} />
+    </div>
   );
 }
 

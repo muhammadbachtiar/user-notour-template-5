@@ -28,7 +28,7 @@ export default function Header({ data }: HeaderProps) {
   const mainNav = data?.menus ?? []
 
   return (
-    <header className="w-full village-header fixed top-0 z-50">
+    <header className="w-full village-header fixed top-0 z-50" suppressHydrationWarning>
       <div className="hidden md:flex justify-center bg-[#F8F6F6]">
         <div className="px-6 py-2 sm:px-0 max-w-lg md:max-w-3xl lg:max-w-5xl xl:max-w-6xl 2xl:max-w-7xl w-full flex items-center justify-between">
            <div className="flex items-center space-x-3">

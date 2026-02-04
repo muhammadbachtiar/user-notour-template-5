@@ -7,6 +7,22 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import ArtikelPopuler from "./artikelPopuler";
 
+// Helper function to format date consistently
+const formatDate = (dateString: string | null | undefined) => {
+  if (!dateString) return 'Tanggal tidak tersedia';
+  try {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('id-ID', {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    });
+  } catch {
+    return 'Tanggal tidak tersedia';
+  }
+};
+
 export function NewsSection() {
   const { data, isLoading } = useArticle({ "page_size": 4, "order": "desc", "by": "published_at" });
   const { article } = useContent();
@@ -71,15 +87,9 @@ export function NewsSection() {
                           initial={{ y: 10, opacity: 0.6 }}
                           animate={{ y: 0, opacity: 1 }}
                           transition={{ duration: 0.3, delay: 0.2 }}
+                          suppressHydrationWarning
                         >
-                          {item.published_at
-                            ? new Date(item.published_at).toLocaleDateString('id-ID', {
-                                weekday: 'long',
-                                day: 'numeric',
-                                month: 'long',
-                                year: 'numeric',
-                              })
-                            : 'Tanggal tidak tersedia'}
+                          {formatDate(item.published_at)}
                         </motion.p>
                       </motion.div>
                     </motion.div>
